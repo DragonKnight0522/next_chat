@@ -51,7 +51,7 @@ export async function removeChat({ id, path }: { id: string; path: string }) {
 
   const uid = await kv.hget<string>(`chat:${id}`, 'userId')
 
-  if (uid !== session?.user?.id) {
+  if (uid != session?.user?.id) {
     return {
       error: 'Unauthorized'
     }
@@ -87,7 +87,7 @@ export async function clearChats() {
   await pipeline.exec()
 
   revalidatePath('/')
-  return redirect('/')
+  return revalidatePath('/')
 }
 
 export async function getSharedChat(id: string) {
